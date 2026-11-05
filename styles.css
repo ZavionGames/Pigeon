@@ -249,6 +249,39 @@ h1 {
     font-weight: 400;
 }
 
+#crackInput,
+#cmpA,
+#cmpB {
+    width: 100%;
+    padding: 14px 52px 14px 14px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--control-radius);
+    background: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+    font-weight: 600;
+    outline: none;
+    letter-spacing: 0.02em;
+    appearance: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#crackInput:focus,
+#cmpA:focus,
+#cmpB:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+#crackInput::placeholder,
+#cmpA::placeholder,
+#cmpB::placeholder {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
 .copy-btn {
     position: absolute;
     right: 6px;
@@ -346,7 +379,7 @@ h1 {
     background: transparent;
     border: none;
     border-radius: 6px;
-    padding: 7px 10px;
+    padding: 7px 14px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
     white-space: nowrap;
@@ -551,33 +584,6 @@ h1 {
 
 .compare-row .result-label {
     margin-bottom: 8px;
-}
-
-.compare-row input[type="text"] {
-    width: 100%;
-    padding: 14px 52px 14px 14px;
-    font-size: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--control-radius);
-    background: var(--bg-canvas);
-    color: var(--text-primary);
-    font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
-    font-weight: 600;
-    outline: none;
-    letter-spacing: 0.02em;
-    appearance: none;
-}
-
-.compare-row input[type="text"]:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px var(--accent-soft);
-}
-
-.compare-row input[type="text"]::placeholder {
-    color: var(--text-secondary);
-    font-weight: 400;
-    font-family: inherit;
-    letter-spacing: 0;
 }
 
 .compare-verdict {
