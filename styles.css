@@ -170,7 +170,7 @@ body.modal-open {
 
 .container {
     width: 100%;
-    max-width: 520px;
+    max-width: 580px;
     padding: 32px;
     background: var(--bg-secondary);
     border-radius: var(--panel-radius);
@@ -681,7 +681,7 @@ h1 {
 
     .container {
         width: 100%;
-        max-width: 520px;
+        max-width: 580px;
         margin-bottom: 20px;
     }
 }
