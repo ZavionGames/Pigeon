@@ -52,7 +52,8 @@ body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--bg-canvas);
     background-image: radial-gradient(ellipse 90% 42% at 50% -8%, var(--bg-wash), transparent 70%);
@@ -91,13 +92,30 @@ body.modal-open {
     z-index: 1100;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 8px;
     min-height: 56px;
     padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left));
     background: color-mix(in srgb, var(--bg-canvas) 88%, transparent);
     border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
+}
+
+.top-bar-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.top-bar-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.top-bar-links a:hover {
+    color: var(--accent-color);
 }
 
 .theme-toggle {
@@ -304,24 +322,31 @@ h1 {
 /* ── Tabs ──────────────────────────────────────────────────────────────── */
 .tabs {
     display: flex;
-    gap: 4px;
+    gap: 3px;
     background: var(--bg-canvas);
     border: 1px solid var(--border-color);
     border-radius: var(--control-radius);
-    padding: 4px;
+    padding: 3px;
     margin-bottom: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .tab {
-    flex: 1;
+    flex: 0 0 auto;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     color: var(--text-secondary);
     background: transparent;
     border: none;
     border-radius: 6px;
-    padding: 8px 12px;
+    padding: 7px 10px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
     white-space: nowrap;
