@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Primary SEO -->
+    <title>Pigeon — Free Password & Username Generator</title>
+    <meta name="description" content="Generate strong passwords, passphrases, PINs and usernames instantly. Everything runs in your browser — no data is ever sent to a server.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pigeonofficial.vercel.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pigeon">
+    <meta property="og:title" content="Pigeon — Free Password & Username Generator">
+    <meta property="og:description" content="Generate strong passwords, passphrases, PINs and usernames instantly. Everything runs in your browser — no data is ever sent to a server.">
+    <meta property="og:url" content="https://pigeonofficial.vercel.app/">
+    <meta property="og:image" content="https://pigeonofficial.vercel.app/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pigeon — Free Password & Username Generator">
+    <meta name="twitter:description" content="Generate strong passwords, passphrases, PINs and usernames instantly. No data collected, no server, everything runs in your browser.">
+    <meta name="twitter:image" content="https://pigeonofficial.vercel.app/og-image.png">
+
+    <!-- Theme & PWA -->
+    <meta name="theme-color" content="#3d5c57">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pigeon">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- JSON-LD: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Pigeon",
+      "url": "https://pigeonofficial.vercel.app/",
+      "description": "Free browser-based tool to generate strong passwords, passphrases, PINs and usernames. No data collected.",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Pigeon",
+        "url": "https://pigeonofficial.vercel.app/"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Pigeon store or send my passwords anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All generation happens locally in your browser using the Web Crypto API. Nothing is ever sent to a server or stored beyond your current session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How random are the generated passwords?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pigeon uses crypto.getRandomValues, the browser's cryptographically secure random number generator, which is the same standard used by security professionals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a passphrase and why is it better?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A passphrase is a sequence of random words (e.g. river-castle-flame-orbit). It is often easier to remember than a random password while providing comparable or better entropy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Pigeon offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Chrome extension version works fully offline. The web app requires a one-time load but makes no network calls during generation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the strength meter measure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The strength meter estimates entropy in bits based on the character pool size and password length. Higher bits means exponentially harder to crack by brute force."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Pigeon open source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The full source code is available on GitHub at github.com/ZavionGames/Pigeon so you can inspect exactly how generation works."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite (sitelinks searchbox optional) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Pigeon",
+      "url": "https://pigeonofficial.vercel.app/"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Theme init (before paint to avoid flash) -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-bar" role="banner">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+            <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main class="container" id="main-content">
+        <header class="page-header">
+            <h1>Pigeon</h1>
+            <p class="lede">Free password, passphrase, PIN and username generator. Runs entirely in your browser — nothing is ever sent to a server.</p>
+        </header>
+
+        <!-- Tabs -->
+        <nav aria-label="Generator tools">
+            <div class="tabs" role="tablist" aria-label="Generator type">
+                <button type="button" class="tab active" role="tab" aria-selected="true"  aria-controls="panel-password"    id="tab-password"    data-tab="password">Password</button>
+                <button type="button" class="tab"        role="tab" aria-selected="false" aria-controls="panel-passphrase"  id="tab-passphrase"  data-tab="passphrase">Passphrase</button>
+                <button type="button" class="tab"        role="tab" aria-selected="false" aria-controls="panel-pin"         id="tab-pin"         data-tab="pin">PIN</button>
+                <button type="button" class="tab"        role="tab" aria-selected="false" aria-controls="panel-username"    id="tab-username"    data-tab="username">Username</button>
+                <button type="button" class="tab"        role="tab" aria-selected="false" aria-controls="panel-cracktime"   id="tab-cracktime"   data-tab="cracktime">Crack Time</button>
+                <button type="button" class="tab"        role="tab" aria-selected="false" aria-controls="panel-compare"     id="tab-compare"     data-tab="compare">Compare</button>
+            </div>
+        </nav>
+
+        <!-- Shared result -->
+        <section class="result-section" aria-label="Generated result">
+            <label class="result-label" for="result">Generated result</label>
+            <div class="result-input-wrapper">
+                <input type="text" id="result" placeholder="Your result will appear here…" readonly autocomplete="off" spellcheck="false" aria-live="polite" aria-atomic="true">
+                <button type="button" class="copy-btn" id="copyBtn" aria-label="Copy to clipboard">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="strength" id="strength" hidden>
+                <div class="strength-bar" aria-hidden="true">
+                    <span class="strength-fill" id="strengthFill"></span>
+                </div>
+                <p class="strength-label" id="strengthLabel" aria-live="polite"></p>
+                <p class="strength-note">Estimated time to crack assuming a completely random password and offline attack at 10 billion attempts/sec.</p>
+            </div>
+        </section>
+
+        <!-- PASSWORD panel -->
+        <section class="panel" id="panel-password" role="tabpanel" aria-labelledby="tab-password">
+            <div class="length-section">
+                <div class="length-label">
+                    <label for="length">Password length</label>
+                    <span class="length-value" id="lengthValue" aria-live="polite">16</span>
+                </div>
+                <input type="range" id="length" min="8" max="64" value="16" aria-valuemin="8" aria-valuemax="64" aria-valuenow="16" aria-label="Password length">
+            </div>
+            <div class="settings-section" aria-labelledby="settingsLabel">
+                <p class="settings-label" id="settingsLabel">Include characters</p>
+                <div class="checkbox-group">
+                    <label class="checkbox-item" for="uppercase">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span>Uppercase (A–Z)</span>
+                    </label>
+                    <label class="checkbox-item" for="lowercase">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span>Lowercase (a–z)</span>
+                    </label>
+                    <label class="checkbox-item" for="numbers">
+                        <input type="checkbox" id="numbers" checked>
+                        <span>Numbers (0–9)</span>
+                    </label>
+                    <label class="checkbox-item" for="symbols">
+                        <input type="checkbox" id="symbols" checked>
+                        <span>Symbols (!@#$%…)</span>
+                    </label>
+                    <label class="checkbox-item" for="excludeSimilar">
+                        <input type="checkbox" id="excludeSimilar">
+                        <span>Exclude similar (il1O0)</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASSPHRASE panel -->
+        <section class="panel" id="panel-passphrase" role="tabpanel" aria-labelledby="tab-passphrase" hidden>
+            <div class="length-section">
+                <div class="length-label">
+                    <label for="wordCount">Number of words</label>
+                    <span class="length-value" id="wordCountValue" aria-live="polite">4</span>
+                </div>
+                <input type="range" id="wordCount" min="3" max="8" value="4" aria-valuemin="3" aria-valuemax="8" aria-valuenow="4" aria-label="Number of words">
+            </div>
+            <div class="settings-section">
+                <p class="settings-label">Separator</p>
+                <div class="separator-group" role="radiogroup" aria-label="Word separator">
+                    <label class="sep-item"><input type="radio" name="separator" value="-" checked> <span>Hyphen&nbsp;&nbsp;(word-word)</span></label>
+                    <label class="sep-item"><input type="radio" name="separator" value="_"> <span>Underscore&nbsp;(word_word)</span></label>
+                    <label class="sep-item"><input type="radio" name="separator" value="."> <span>Dot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(word.word)</span></label>
+                    <label class="sep-item"><input type="radio" name="separator" value=" "> <span>Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(word word)</span></label>
+                </div>
+            </div>
+        </section>
+
+        <!-- PIN panel -->
+        <section class="panel" id="panel-pin" role="tabpanel" aria-labelledby="tab-pin" hidden>
+            <div class="length-section">
+                <div class="length-label">
+                    <label for="pinLength">PIN length</label>
+                    <span class="length-value" id="pinLengthValue" aria-live="polite">4</span>
+                </div>
+                <input type="range" id="pinLength" min="4" max="12" value="4" aria-valuemin="4" aria-valuemax="12" aria-valuenow="4" aria-label="PIN length">
+            </div>
+        </section>
+
+        <!-- USERNAME panel -->
+        <section class="panel" id="panel-username" role="tabpanel" aria-labelledby="tab-username" hidden>
+            <div class="settings-section">
+                <p class="settings-label">Style</p>
+                <div class="separator-group" role="radiogroup" aria-label="Username style">
+                    <label class="sep-item"><input type="radio" name="usernameStyle" value="adjnoun" checked> <span>Adjective + Noun&nbsp;&nbsp;(SilentFox)</span></label>
+                    <label class="sep-item"><input type="radio" name="usernameStyle" value="adjnounnum"> <span>+ Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(SilentFox42)</span></label>
+                    <label class="sep-item"><input type="radio" name="usernameStyle" value="word"> <span>Random word&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(tunnel)</span></label>
+                    <label class="sep-item"><input type="radio" name="usernameStyle" value="wordnum"> <span>Word + Number&nbsp;&nbsp;&nbsp;&nbsp;(tunnel42)</span></label>
+                </div>
+            </div>
+        </section>
+
+        <button type="button" class="generate-btn" id="generateBtn">Generate password</button>
+
+        <!-- CRACK TIME panel -->
+        <section class="panel" id="panel-cracktime" role="tabpanel" aria-labelledby="tab-cracktime" hidden>
+            <div class="cracktime-tool">
+                <label class="result-label" for="crackInput">Enter a password to analyze</label>
+                <div class="result-input-wrapper">
+                    <input type="text" id="crackInput" placeholder="Type or paste a password…" autocomplete="off" spellcheck="false">
+                </div>
+                
+                <div class="strength" id="strengthCrack" hidden>
+                    <div class="strength-bar"><span class="strength-fill" id="strengthFillCrack"></span></div>
+                    <p class="strength-label" id="strengthLabelCrack" aria-live="polite"></p>
+                </div>
+
+                <div class="cracktime-scenarios" id="cracktimeScenarios" hidden>
+                    <h3>Attack scenarios</h3>
+                    <div class="scenario-grid">
+                        <div class="scenario-item">
+                            <strong>Fast offline (MD5/SHA-1)</strong>
+                            <p class="scenario-value" id="scenarioFast">—</p>
+                            <span class="scenario-note">10 billion attempts/sec</span>
+                        </div>
+                        <div class="scenario-item">
+                            <strong>Slow offline (bcrypt/Argon2)</strong>
+                            <p class="scenario-value" id="scenarioSlow">—</p>
+                            <span class="scenario-note">10,000 attempts/sec</span>
+                        </div>
+                        <div class="scenario-item">
+                            <strong>Online (login throttling)</strong>
+                            <p class="scenario-value" id="scenarioOnline">—</p>
+                            <span class="scenario-note">10 attempts/sec</span>
+                        </div>
+                    </div>
+                    <p class="cracktime-disclaimer">These estimates assume the password is completely random. Dictionary words, patterns, and personal information dramatically reduce security.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPARE panel -->
+        <section class="panel" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+            <div class="compare-section">
+                <div class="compare-row">
+                    <label class="result-label" for="cmpA">Password A</label>
+                    <div class="result-input-wrapper">
+                        <input type="text" id="cmpA" placeholder="Type or paste a password…" autocomplete="off" spellcheck="false">
+                        <button type="button" class="copy-btn" id="cmpAClear" aria-label="Clear password A" title="Clear">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <div class="strength" id="strengthA" hidden>
+                        <div class="strength-bar"><span class="strength-fill" id="strengthFillA"></span></div>
+                        <p class="strength-label" id="strengthLabelA" aria-live="polite"></p>
+                    </div>
+                </div>
+                <div class="compare-row">
+                    <label class="result-label" for="cmpB">Password B</label>
+                    <div class="result-input-wrapper">
+                        <input type="text" id="cmpB" placeholder="Type or paste another password…" autocomplete="off" spellcheck="false">
+                        <button type="button" class="copy-btn" id="cmpBClear" aria-label="Clear password B" title="Clear">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <div class="strength" id="strengthB" hidden>
+                        <div class="strength-bar"><span class="strength-fill" id="strengthFillB"></span></div>
+                        <p class="strength-label" id="strengthLabelB" aria-live="polite"></p>
+                    </div>
+                </div>
+                <p class="strength-note" style="margin-top: 8px">Crack time assumes offline attack at 10 billion attempts/sec.</p>
+                <div class="compare-verdict" id="compareVerdict" hidden aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- SEO content block -->
+        <section class="seo-block" aria-label="About Pigeon">
+            <h2>Browser-based security tools, no account needed</h2>
+            <p>Pigeon generates cryptographically random passwords, passphrases, PINs and usernames directly in your browser using <code>crypto.getRandomValues</code>. No data is ever sent to a server, stored in a database, or shared with third parties.</p>
+
+            <h3>How to generate a strong password</h3>
+            <p>Select your desired length (16+ characters recommended), enable uppercase, lowercase, numbers and symbols, then click Generate. The entropy meter shows strength in bits — aim for 80+ bits for important accounts.</p>
+
+            <h3>Is my data safe?</h3>
+            <p>Yes. Generation happens entirely in memory on your device. You can verify this by opening the browser's network inspector — no outgoing requests are made during generation. The full source code is available on <a href="https://github.com/ZavionGames/Pigeon" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <footer class="site-footer" role="contentinfo">
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://github.com/ZavionGames/Pigeon" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://github.com/ZavionGames/Pigeon-Extensions" target="_blank" rel="noopener noreferrer">Chrome Extension</a>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

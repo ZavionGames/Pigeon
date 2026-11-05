@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Pigeon Privacy Policy — no data collected, everything runs in your browser.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pigeonofficial.vercel.app/privacy">
+    <meta property="og:title" content="Privacy Policy — Pigeon">
+    <meta property="og:description" content="Pigeon collects zero data. All generation runs locally in your browser.">
+    <meta property="og:url" content="https://pigeonofficial.vercel.app/privacy">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#3d5c57">
+    <title>Privacy Policy — Pigeon</title>
+    <link rel="icon" href="Pigeon-Logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="Pigeon-Logo.png">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (!theme) {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .privacy-container {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        .privacy-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--panel-radius);
+            box-shadow: 0 1px 2px var(--shadow);
+            padding: 32px 32px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 28px;
+            opacity: 0.85;
+        }
+
+        .back-link:hover { opacity: 1; }
+
+        .back-link svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        .privacy-header {
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .privacy-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .privacy-header .meta {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .privacy-section {
+            margin-bottom: 28px;
+        }
+
+        .privacy-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy-section h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .privacy-section p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .privacy-section p + p {
+            margin-top: 8px;
+        }
+
+        .privacy-section ul {
+            margin-top: 8px;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .privacy-section ul li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            padding: 10px 12px;
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-color);
+            border-radius: var(--control-radius);
+        }
+
+        .privacy-section ul li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--accent-soft);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            margin-bottom: 16px;
+        }
+
+        .badge svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .contact-box {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-color);
+            border-radius: var(--control-radius);
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .contact-box a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-box a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            .privacy-card { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+            <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main class="container">
+        <div class="privacy-container">
+            <a href="index.html" class="back-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Pigeon
+            </a>
+
+            <div class="privacy-card">
+
+                <div class="badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Zero data collected
+                </div>
+
+                <div class="privacy-header">
+                    <h1>Privacy Policy</h1>
+                    <p class="meta">Pigeon &mdash; Last updated: November 2026</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Overview</h2>
+                    <p>Pigeon is a browser-based security tool for generating passwords, passphrases, PINs, and usernames. We are committed to your privacy. This policy explains exactly what we do — and do not — collect.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Data We Do Not Collect</h2>
+                    <p>Pigeon does not collect, store, transmit, or share any user data. This includes:</p>
+                    <ul>
+                        <li><strong>Passwords &amp; generated content</strong> — all generation happens locally in your browser. Nothing is sent to any server.</li>
+                        <li><strong>Personal information</strong> — we do not ask for or receive your name, email, account, or any identifying information.</li>
+                        <li><strong>Usage data &amp; analytics</strong> — no analytics tools, tracking pixels, or telemetry of any kind are used.</li>
+                        <li><strong>Cookies</strong> — we do not use cookies for tracking. The only value stored locally is your theme preference (light/dark), which never leaves your device.</li>
+                        <li><strong>IP addresses &amp; device info</strong> — we do not log or store network requests or device identifiers.</li>
+                        <li><strong>Third-party data sharing</strong> — we do not share, sell, or rent data to any third party because we have no data to share.</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>How Pigeon Works</h2>
+                    <p>Every operation — password generation, strength estimation, passphrase assembly — runs entirely inside your browser using the Web Crypto API (<code>crypto.getRandomValues</code>). No network request is made during generation.</p>
+                    <p>The only external requests your browser makes are loading the page itself and the Geist font from Google Fonts. If you prefer full offline use, the Chrome extension version works with no external requests at all.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Local Storage</h2>
+                    <p>Pigeon stores a single key in your browser's <code>localStorage</code>:</p>
+                    <ul>
+                        <li><strong>theme</strong> — your preferred color scheme (light or dark). This value stays on your device and is never transmitted.</li>
+                    </ul>
+                    <p>You can clear this at any time through your browser's developer tools or by clearing site data.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Chrome Extension</h2>
+                    <p>The Pigeon Chrome extension requests no special permissions and collects no data. Generated passwords exist only in your browser's memory for the duration of the session and are never persisted or transmitted.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Children's Privacy</h2>
+                    <p>Pigeon does not knowingly collect any information from anyone, including children under 13. Since we collect no data at all, there is nothing to protect.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Changes to This Policy</h2>
+                    <p>If this policy changes, the updated version will be published at this URL with a new date. We will never introduce data collection without clear, prominent notice.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2>Contact</h2>
+                    <div class="contact-box">
+                        Questions about this policy? Open an issue on our GitHub repository:<br>
+                        <a href="https://github.com/ZavionGames/Pigeon" target="_blank" rel="noopener noreferrer">github.com/ZavionGames/Pigeon</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('themeToggle').addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme');
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            this.setAttribute('aria-label', next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        });
+    </script>
+</body>
+</html>

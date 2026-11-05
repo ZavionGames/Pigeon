@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#3d5c57">
+    <link rel="canonical" href="https://pigeonofficial.vercel.app/">
+    <title>Page not found · Pigeon</title>
+    <link rel="icon" href="Pigeon-Logo.png" type="image/png">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (!theme) {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="not-found-page">
+    <main class="not-found">
+        <p class="not-found-code">404</p>
+        <h1>Page not found</h1>
+        <p class="lede">This address is not part of Pigeon. The generator is on the home page.</p>
+        <a class="generate-btn not-found-link" href="/">Back to Pigeon</a>
+    </main>
+</body>
+</html>
