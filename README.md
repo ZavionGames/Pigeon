@@ -36,12 +36,8 @@ Or visit: [pigeonofficial.vercel.app](https://pigeonofficial.vercel.app)
 | `privacy.html` | Privacy policy |
 | `Pigeon-Logo.png` | Favicon / logo |
 | `404.html` | Custom 404 (Vercel) |
-| `robots.txt` | Crawler directives |
 | `sitemap.xml` | Sitemap |
 | `site.webmanifest` | PWA manifest |
-| `llms.txt` | AI crawler summary |
-| `humans.txt` | Team info |
-| `.well-known/security.txt` | Security contact |
 | `vercel.json` | Vercel config, security headers |
 
 ## Privacy
